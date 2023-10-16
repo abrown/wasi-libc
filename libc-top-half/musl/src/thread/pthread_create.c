@@ -315,6 +315,7 @@ hidden void __wasi_thread_start_C(int tid, void *p)
 	// without waiting.
 	atomic_store((atomic_int *) &(self->tid), tid);
 	// Execute the user's start function.
+	__fork_handler(1);
 	__pthread_exit(args->start_func(args->start_arg));
 }
 #endif
@@ -540,7 +541,9 @@ int __pthread_create(pthread_t *restrict res, const pthread_attr_t *restrict att
 	 * of the current module and start executing the entry function. The
 	 * wasi-threads specification requires the module to export a
 	 * `wasi_thread_start` function, which is invoked with `args`. */
+	__fork_handler(-1);
 	ret = __wasi_thread_spawn((void *) args);
+	__fork_handler(0);
 #endif
 
 #ifdef __wasilibc_unmodified_upstream

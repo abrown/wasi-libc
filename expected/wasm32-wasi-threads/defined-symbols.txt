@@ -63,6 +63,7 @@ __flbf
 __floatscan
 __fmodeflags
 __fopen_rb_ca
+__fork_handler
 __fpending
 __fpurge
 __fputwc_unlocked
@@ -977,6 +978,7 @@ program_invocation_name
 program_invocation_short_name
 pselect
 psignal
+pthread_atfork
 pthread_attr_destroy
 pthread_attr_getdetachstate
 pthread_attr_getguardsize
